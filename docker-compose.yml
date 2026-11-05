@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    image: ${DOCKERHUB_USERNAME:-local}/nodeapp:${IMAGE_TAG:-dev}
+    image: ${IMAGE_NAME:-local/nodeapp}:${IMAGE_TAG:-dev}
     container_name: nodeapp
     restart: unless-stopped
     ports:
