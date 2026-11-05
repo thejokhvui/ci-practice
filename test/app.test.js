@@ -28,6 +28,12 @@ test('GET /health returns ok', async () => {
   assert.deepStrictEqual(await res.json(), { status: 'ok' });
 });
 
+test('GET /db returns 503 without database', async () => {
+  const res = await fetch(`${baseUrl}/db`);
+  assert.strictEqual(res.status, 503);
+  assert.deepStrictEqual(await res.json(), { database: 'not connected' });
+});
+
 test('unknown route returns 404', async () => {
   const res = await fetch(`${baseUrl}/nope`);
   assert.strictEqual(res.status, 404);

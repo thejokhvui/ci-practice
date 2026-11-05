@@ -2,7 +2,7 @@
 
 Простий Node.js-застосунок для практичної роботи з CI/CD.
 
-При пуші в `main` GitHub Actions встановлює залежності, запускає тести, робить білд, копіює файли на сервер і запускає застосунок через pm2.
+При пуші в `main` GitHub Actions встановлює залежності, запускає тести, робить білд, збирає Docker-образ, пушить його в Docker Hub і запускає застосунок на сервері через docker compose.
 
 ## Важливо про сервер
 
@@ -14,5 +14,22 @@
 
     npm install
     npm test
-    npm run build
     npm start
+
+## Docker
+
+Зібрати образ із тегом за хешем коміту (замість `<your-name>` твоє ім'я на Docker Hub):
+
+    docker build -t <your-name>/nodeapp:$(git rev-parse --short HEAD) .
+
+Запустити застосунок разом із PostgreSQL:
+
+    docker compose up -d --build
+    docker compose logs app
+    curl http://localhost:3000/db
+
+Тег образу задає змінна `IMAGE_TAG` у `docker-compose.yml`.
+
+## Secrets у GitHub
+
+`EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY_B64`, `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`.
