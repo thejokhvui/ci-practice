@@ -39,3 +39,16 @@
 `EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY_B64`.
 
 Для входу в реєстр використовується вбудований `GITHUB_TOKEN`.
+
+## Terraform (ПЗ 12)
+
+Сервер EC2 і security group створюються через Terraform.
+
+1. Встановити Terraform.
+2. У `terraform/terraform.tfvars` вказати свій `ami_id` (Ubuntu 22.04 для us-east-1).
+3. Перейти в папку: `cd terraform`
+4. `terraform init`
+5. `terraform plan`
+6. `terraform apply`
+7. З виводу взяти `instance_ip` і вписати його в GitHub secret `EC2_HOST`.
+8. Після перевірки зробити `terraform destroy`, щоб не платити за сервер.
