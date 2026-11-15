@@ -52,7 +52,6 @@ resource "aws_instance" "nodeapp" {
   user_data = <<-EOT
     #!/bin/bash
     curl -fsSL https://get.docker.com | sh
-    apt-get install -y docker-compose-plugin
     usermod -aG docker ubuntu
   EOT
 
